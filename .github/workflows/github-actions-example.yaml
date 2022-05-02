@@ -1,0 +1,23 @@
+#actions的名称
+name: github-actions-example
+#触发这个工作流的事件
+on: [push]
+#作业内容
+jobs:
+  #作业1 check-version
+  check-code:
+    name: 测试代码
+    # 运行器为ubuntu
+    runs-on: ubuntu-latest
+    # 步骤
+    steps:
+      - name: 拉取代码
+        uses: actions/checkout@v3
+
+      - name: 安装go
+        uses: actions/setup-go@v3
+        with:
+          go-version: '^1.16.0'
+
+      - name: 运行代码
+        run: go run ./main.go
