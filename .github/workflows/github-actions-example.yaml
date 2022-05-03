@@ -2,6 +2,11 @@
 name: github-actions-example
 #触发这个工作流的事件
 on: [push]
+# 全局环境变量
+env:
+  GO_VERSION: 1.18.0
+  GO_USERNAME: root
+  GO_PASSWORD: root
 #作业内容
 jobs:
   show-time:
@@ -29,7 +34,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest]
-        go: ['1.16.0', '1.18.0']
+        #go: ['1.16.0', '1.18.0']
     # 步骤
     steps:
       - name: 拉取代码
@@ -41,12 +46,10 @@ jobs:
         uses: actions/setup-go@v3
         with:
           # 这里直接取了上面定义好的 版本
-          go-version: ${{ matrix.go }}
+          go-version: ${{ env.GO_VERSION }}
 
       - name: 运行代码单元测试
         # 在步骤中可以使用env 来定义环境变量
         env:
-          GO_USERNAME: root
-          GO_PASSWORD: root
           GO_ENV_USERNAME: ${{ env.GO_USERNAME }}
         run: go test -v ./tests
