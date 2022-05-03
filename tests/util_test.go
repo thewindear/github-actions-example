@@ -20,5 +20,7 @@ func TestUtil_LookEnv(t *testing.T) {
     if os.Getenv("GO_PASSWORD") != "root" {
         t.Error("GO_PASSWORD NOT ROOT")
     }
-    t.Log(os.Getenv("GO_EXPRESSION"))
+    //t.Log(os.Getenv("GO_EXPRESSION"))
+    t.Log(os.Getenv("GO_ENV_USERNAME"))
+
 }

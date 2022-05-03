@@ -13,7 +13,8 @@ jobs:
     steps:
       - name: 拉取代码
         uses: actions/checkout@v3
-        if: ${{ contains('hello world', 'abc') }}
+        # 当表达式中返回false会跳转这个步骤
+        # if: ${{ contains('hello world', 'abc') }}
 
       - name: 安装go
         uses: actions/setup-go@v3
@@ -26,5 +27,5 @@ jobs:
           GO_USERNAME: root
           GO_PASSWORD: root
           GO_EXPRESSION: ${{ 'go expression env' }}
-        #if: ${{ GO_USERNAME = root }}
+          GO_ENV_USERNAME: ${{ env.GO_USERNAME }}
         run: go test -v ./tests
