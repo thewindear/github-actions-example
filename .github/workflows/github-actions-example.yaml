@@ -24,5 +24,6 @@ jobs:
         env:
           GO_USERNAME: root
           GO_PASSWORD: root
-        if: ${{ GO_USERNAME = root }}
+          GO_EXPRESSION: ${{ 'go expression env' }}
+        #if: ${{ GO_USERNAME = root }}
         run: go test -v ./tests
