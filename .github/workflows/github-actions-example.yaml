@@ -4,6 +4,22 @@ name: github-actions-example
 on: [push]
 #作业内容
 jobs:
+  show-time:
+    name: 显示时间
+    runs-on: ubuntu-latest
+    steps:
+      - name: 打印时间
+        run: date
+  show-os:
+    name: 显示系统版本
+    # 这里是依赖于 check-code和show-time这两个job的也就是他会最后才执行
+    needs:
+      - check-code
+      - show-time
+    runs-on: ubuntu-latest
+    steps:
+      - name: 显示系统版本
+        run: uname -a
   #作业1 check-version
   check-code:
     name: 测试代码
@@ -26,6 +42,5 @@ jobs:
         env:
           GO_USERNAME: root
           GO_PASSWORD: root
-          GO_EXPRESSION: ${{ 'go expression env' }}
           GO_ENV_USERNAME: ${{ env.GO_USERNAME }}
         run: go test -v ./tests
