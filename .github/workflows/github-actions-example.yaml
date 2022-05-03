@@ -13,6 +13,7 @@ jobs:
     steps:
       - name: 拉取代码
         uses: actions/checkout@v3
+        if: ${{ contains('hello world', 'abc') }}
 
       - name: 安装go
         uses: actions/setup-go@v3
